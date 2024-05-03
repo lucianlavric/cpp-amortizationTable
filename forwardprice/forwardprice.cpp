@@ -50,14 +50,24 @@ int main(){
     if (pays_dividends == 'y') {
         cout << "It pays dividends." << endl;
         // Calculate forward price with dividends
+
+        cout << "How much is the dividend?" << endl;
+        double dividend_amount;
+        cin >> dividend_amount;
+
+        cout << "When is the dividend to be paid?" << endl;
+        double dividend_paid_date;
+        cin >> dividend_paid_date;
+
+        forward_price = (underlying_current_spot_price - dividend_amount/(pow((risk_free_rate + 1), (dividend_paid_date / 365)))) * pow(1+risk_free_rate, delivery_date_in_yrs);
+        cout << "Your contract's forward price is $" << fixed << setprecision(2) << forward_price << endl;
     }
+
     else if (pays_dividends == 'n') {
         cout << "It does not pay dividends." << endl;
         // Calculate forward price without dividends
         forward_price = underlying_current_spot_price * (pow(M_E, delivery_date_in_yrs * risk_free_rate));
         cout << "Your contract's forward price is $" << fixed << setprecision(2) << forward_price << endl;
-    }
-
-    
+    }   
 
 }
